@@ -1,5 +1,9 @@
 # AIRA — AI Research Aggregator
 
+<p align="center">
+  <img src="aira.png" alt="AI Research Aggregator" width="300">
+</p>
+
 > A modular, Go-based CLI intelligence platform for monitoring AI research,  
 > model releases, and cloud-native ecosystem updates via RSS feeds.
 
