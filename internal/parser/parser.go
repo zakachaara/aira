@@ -13,9 +13,9 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/zakachaara/aira/internal/logger"
-	"github.com/zakachaara/aira/internal/models"
-	"github.com/zakachaara/aira/internal/storage"
+	"github.com/aira/aira/internal/logger"
+	"github.com/aira/aira/internal/models"
+	"github.com/aira/aira/internal/storage"
 )
 
 const defaultBatchSize = 500

@@ -9,14 +9,14 @@ import (
 	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"
 
-	"github.com/zakachaara/aira/internal/analyzer"
-	"github.com/zakachaara/aira/internal/classifier"
-	"github.com/zakachaara/aira/internal/collector"
-	"github.com/zakachaara/aira/internal/config"
-	"github.com/zakachaara/aira/internal/digest"
-	"github.com/zakachaara/aira/internal/logger"
-	"github.com/zakachaara/aira/internal/parser"
-	"github.com/zakachaara/aira/internal/storage"
+	"github.com/aira/aira/internal/analyzer"
+	"github.com/aira/aira/internal/classifier"
+	"github.com/aira/aira/internal/collector"
+	"github.com/aira/aira/internal/config"
+	"github.com/aira/aira/internal/digest"
+	"github.com/aira/aira/internal/logger"
+	"github.com/aira/aira/internal/parser"
+	"github.com/aira/aira/internal/storage"
 )
 
 // Scheduler wraps a cron runner with the AIRA pipeline stages.

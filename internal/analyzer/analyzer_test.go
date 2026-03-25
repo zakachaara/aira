@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zakachaara/aira/internal/analyzer"
-	"github.com/zakachaara/aira/internal/models"
-	"github.com/zakachaara/aira/internal/storage"
+	"github.com/aira/aira/internal/analyzer"
+	"github.com/aira/aira/internal/models"
+	"github.com/aira/aira/internal/storage"
 )
 
 // ─────────────────────────────────────────────

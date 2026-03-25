@@ -136,7 +136,7 @@ collect:
   timeout_seconds: 30
   max_concurrent: 5
   retry_attempts: 2
-  user_agent: "AIRA/1.0 (+https://github.com/zakachaara/aira)"
+  user_agent: "AIRA/1.0 (+https://github.com/aira/aira)"
 
 digest:
   max_entries_per_section: 10

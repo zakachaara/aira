@@ -13,7 +13,7 @@ import (
 
 	_ "github.com/mattn/go-sqlite3"
 
-	"github.com/zakachaara/aira/internal/models"
+	"github.com/aira/aira/internal/models"
 )
 
 // ─────────────────────────────────────────────

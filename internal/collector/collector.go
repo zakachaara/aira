@@ -12,10 +12,10 @@ import (
 	"github.com/mmcdole/gofeed"
 	"go.uber.org/zap"
 
-	"github.com/zakachaara/aira/internal/config"
-	"github.com/zakachaara/aira/internal/logger"
-	"github.com/zakachaara/aira/internal/models"
-	"github.com/zakachaara/aira/internal/storage"
+	"github.com/aira/aira/internal/config"
+	"github.com/aira/aira/internal/logger"
+	"github.com/aira/aira/internal/models"
+	"github.com/aira/aira/internal/storage"
 )
 
 // Collector fetches feeds and persists raw entries.

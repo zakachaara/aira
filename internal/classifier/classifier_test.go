@@ -3,8 +3,8 @@ package classifier_test
 import (
 	"testing"
 
-	"github.com/zakachaara/aira/internal/classifier"
-	"github.com/zakachaara/aira/internal/models"
+	"github.com/aira/aira/internal/classifier"
+	"github.com/aira/aira/internal/models"
 )
 
 // classifyOne is a test helper that exposes classification for a single entry.

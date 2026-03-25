@@ -11,7 +11,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
 
-	"github.com/zakachaara/aira/internal/models"
+	"github.com/aira/aira/internal/models"
 )
 
 // ─────────────────────────────────────────────
