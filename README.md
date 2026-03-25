@@ -24,7 +24,7 @@ and surfaces the most relevant developments in a clean terminal digest.
 | **Classify** | Weighted keyword + source-name heuristics → 4 categories + confidence score |
 | **Signals** | Rule-based detection of model releases, research breakthroughs, infra launches |
 | **Trends** | Time-bucketed frequency analysis with log-velocity scoring across 15+ topics |
-| **Digest** | Structured Markdown report with sections, signals table, and trending topics |
+| **Digest** | Structured Markdown & HTML report with sections, signals table, and trending topics |
 | **Schedule** | Cron-compatible background daemon for fully automated pipeline execution |
 | **Sources** | Full CRUD management of feed sources with built-in curated defaults |
 
@@ -294,7 +294,7 @@ aira/
     ├── parser/     # Normaliser: HTML stripping, tag extraction
     ├── classifier/ # Weighted keyword → category + confidence
     ├── analyzer/   # Signal extraction + trend detection
-    ├── digest/     # Markdown report generator
+    ├── digest/     # Markdown + HTML report generator
     ├── delivery/   # Terminal renderer (colour, tables, sparklines)
     └── scheduler/  # robfig/cron wrapper for automated runs
 ```
@@ -334,18 +334,6 @@ make pipeline      # init + full pipeline run
 make release       # cross-compile for all platforms
 make docker        # build Docker image
 ```
-
----
-
-## Roadmap
-
-- [ ] PostgreSQL support (storage driver already abstracted)
-- [ ] LLM-powered summarisation pass (pluggable via config)
-- [ ] Webhook / Slack delivery channel
-- [ ] HTTP API server mode (`aira serve`)
-- [ ] Custom classification rules via YAML config
-- [ ] Feed health monitoring and alerting
-- [ ] Export to OPML / JSON / CSV
 
 ---
 
