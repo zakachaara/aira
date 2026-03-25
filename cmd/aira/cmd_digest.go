@@ -100,7 +100,7 @@ The digest is saved to the database and optionally written to a file.`,
 				fmt.Fprintf(os.Stderr, "  🌐 HTML    → %s\n\n", htmlPath)
 			}
 
-			delivery.PrintDigest(os.Stdout, d)
+			// delivery.PrintDigest(os.Stdout, d)
 			return nil
 		},
 	}
