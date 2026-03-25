@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# AIRA Configuration  ~/.aira/config.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Database ────────────────────────────────────────────────────────────────
+database:
+  # driver: sqlite3 (default) | postgres
+  driver: sqlite3
+  # For SQLite: path to the database file.  ~ is expanded.
+  dsn: ~/.aira/aira.db
+  # For PostgreSQL:
+  # dsn: "host=localhost port=5432 user=aira password=secret dbname=aira sslmode=disable"
+
+# ── Logging ─────────────────────────────────────────────────────────────────
+log:
+  level: info      # debug | info | warn | error
+  pretty: true     # false = JSON output (for log aggregators)
+
+# ── Feed Collection ──────────────────────────────────────────────────────────
+collect:
+  timeout_seconds: 30      # per-feed HTTP timeout
+  max_concurrent: 5        # parallel fetch workers
+  retry_attempts: 2        # retries per feed on error
+  user_agent: "AIRA/1.0 (+https://github.com/aira/aira)"
+
+# ── Digest Generation ────────────────────────────────────────────────────────
+digest:
+  max_entries_per_section: 10   # top N entries per category section
+  trend_window_days: 7          # lookback for trending topics
+  output_dir: ~/.aira/digests   # directory for saved Markdown files
+
+# ── Schedule (cron expressions) ──────────────────────────────────────────────
+schedule:
+  collect: "0 */4 * * *"   # every 4 hours
+  digest:  "0 8 * * *"     # daily at 08:00

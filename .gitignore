@@ -1,0 +1,26 @@
+# Binary
+bin
+dist/
+
+# Test artefacts
+coverage.out
+coverage.html
+
+# Database files (local dev)
+*.db
+*.db-shm
+*.db-wal
+
+# Config overrides (keep config.yaml template in VCS)
+.env
+.aira/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Go
+vendor/
