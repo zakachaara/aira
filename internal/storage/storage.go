@@ -111,8 +111,12 @@ func NewSQLite(dsn string) (*SQLiteRepo, error) {
 func (r *SQLiteRepo) Close() error { return r.db.Close() }
 
 func (r *SQLiteRepo) Migrate(_ context.Context) error {
-	_, err := r.db.Exec(schema)
-	return err
+	if _, err := r.db.Exec(schema); err != nil {
+		return err
+	}
+	// Idempotent column additions for schema evolution (errors ignored — column may already exist)
+	_, _ = r.db.Exec(`ALTER TABLE digests ADD COLUMN html TEXT`)
+	return nil
 }
 
 const schema = `
@@ -198,7 +202,8 @@ CREATE TABLE IF NOT EXISTS digests (
 	sections      TEXT,
 	signals       TEXT,
 	trends        TEXT,
-	markdown      TEXT
+	markdown      TEXT,
+	html          TEXT
 );
 `
 
@@ -473,9 +478,9 @@ func (r *SQLiteRepo) SaveDigest(ctx context.Context, d *models.Digest) error {
 	sig, _ := json.Marshal(d.Signals)
 	trn, _ := json.Marshal(d.Trends)
 	res, err := r.db.ExecContext(ctx, `
-		INSERT INTO digests (generated_at, date_range, total_entries, sections, signals, trends, markdown)
-		VALUES (?,?,?,?,?,?,?)`,
-		time.Now().UTC(), d.DateRange, d.TotalEntries, string(sec), string(sig), string(trn), d.Markdown)
+		INSERT INTO digests (generated_at, date_range, total_entries, sections, signals, trends, markdown, html)
+		VALUES (?,?,?,?,?,?,?,?)`,
+		time.Now().UTC(), d.DateRange, d.TotalEntries, string(sec), string(sig), string(trn), d.Markdown, d.HTML)
 	if err != nil {
 		return err
 	}
@@ -485,14 +490,14 @@ func (r *SQLiteRepo) SaveDigest(ctx context.Context, d *models.Digest) error {
 
 func (r *SQLiteRepo) GetLatestDigest(ctx context.Context) (*models.Digest, error) {
 	row := r.db.QueryRowContext(ctx, `
-		SELECT id, generated_at, date_range, total_entries, sections, signals, trends, markdown
+		SELECT id, generated_at, date_range, total_entries, sections, signals, trends, markdown, COALESCE(html,'')
 		FROM digests ORDER BY generated_at DESC LIMIT 1`)
 	return scanDigest(row)
 }
 
 func (r *SQLiteRepo) ListDigests(ctx context.Context, limit int) ([]*models.Digest, error) {
 	rows, err := r.db.QueryContext(ctx, `
-		SELECT id, generated_at, date_range, total_entries, sections, signals, trends, markdown
+		SELECT id, generated_at, date_range, total_entries, sections, signals, trends, markdown, COALESCE(html,'')
 		FROM digests ORDER BY generated_at DESC LIMIT ?`, limit)
 	if err != nil {
 		return nil, err
@@ -559,7 +564,7 @@ func scanDigest(row rowScanner) (*models.Digest, error) {
 	var d models.Digest
 	var sec, sig, trn string
 	if err := row.Scan(&d.ID, &d.GeneratedAt, &d.DateRange, &d.TotalEntries,
-		&sec, &sig, &trn, &d.Markdown); err != nil {
+		&sec, &sig, &trn, &d.Markdown, &d.HTML); err != nil {
 		return nil, err
 	}
 	_ = json.Unmarshal([]byte(sec), &d.Sections)

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -334,4 +335,22 @@ func signalTypeColor(st models.SignalType) string {
 	default:
 		return string(st)
 	}
+}
+
+// ─────────────────────────────────────────────
+//  HTML file output
+// ─────────────────────────────────────────────
+
+// SaveHTML writes the digest HTML to a timestamped file in outputDir.
+// Returns the path written.
+func SaveHTML(d *models.Digest, outputDir string) (string, error) {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return "", fmt.Errorf("creating output dir: %w", err)
+	}
+	filename := fmt.Sprintf("aira-digest-%s.html", d.GeneratedAt.Format("2006-01-02T150405"))
+	path := filepath.Join(outputDir, filename)
+	if err := os.WriteFile(path, []byte(d.HTML), 0o644); err != nil {
+		return "", fmt.Errorf("writing HTML file: %w", err)
+	}
+	return path, nil
 }

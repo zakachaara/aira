@@ -69,13 +69,35 @@ The digest is saved to the database and optionally written to a file.`,
 				return fmt.Errorf("digest generation failed: %w", err)
 			}
 
-			// Write to file if requested
+			// Write to explicit file path if requested (markdown)
 			if outputFile != "" {
 				if err := writeDigestFile(outputFile, d.Markdown); err != nil {
-					fmt.Fprintf(os.Stderr, "⚠  could not write file: %v\n", err)
+					fmt.Fprintf(os.Stderr, "⚠  could not write markdown file: %v\n", err)
 				} else {
-					fmt.Fprintf(os.Stderr, "  ✓ Digest written to %s\n\n", outputFile)
+					fmt.Fprintf(os.Stderr, "  ✓ Markdown written to %s\n\n", outputFile)
 				}
+			}
+
+			// Auto-save both .md and .html to the configured output dir
+			outDir := app.cfg.Digest.OutputDir
+			if outDir == "" {
+				home, _ := os.UserHomeDir()
+				outDir = filepath.Join(home, ".aira", "digests")
+			}
+			ts := d.GeneratedAt.Format("2006-01-02T150405")
+
+			mdPath := filepath.Join(outDir, fmt.Sprintf("aira-digest-%s.md", ts))
+			if err := writeDigestFile(mdPath, d.Markdown); err != nil {
+				fmt.Fprintf(os.Stderr, "  ⚠  could not save markdown: %v\n", err)
+			} else {
+				fmt.Fprintf(os.Stderr, "  💾 Markdown → %s\n", mdPath)
+			}
+
+			htmlPath := filepath.Join(outDir, fmt.Sprintf("aira-digest-%s.html", ts))
+			if err := writeDigestFile(htmlPath, d.HTML); err != nil {
+				fmt.Fprintf(os.Stderr, "  ⚠  could not save HTML report: %v\n", err)
+			} else {
+				fmt.Fprintf(os.Stderr, "  🌐 HTML    → %s\n\n", htmlPath)
 			}
 
 			delivery.PrintDigest(os.Stdout, d)

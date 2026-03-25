@@ -100,6 +100,9 @@ func (g *Generator) Generate(ctx context.Context, since time.Time) (*models.Dige
 	// ── Render markdown ─────────────────────────────
 	md := renderMarkdown(sections, signals, trends, since, now, totalCount)
 
+	// ── Render HTML ──────────────────────────────────
+	htmlReport := renderHTML(sections, signals, trends, since, now, totalCount)
+
 	digest := &models.Digest{
 		GeneratedAt:  now,
 		DateRange:    fmt.Sprintf("%s – %s", since.Format("2006-01-02 15:04"), now.Format("2006-01-02 15:04")),
@@ -108,6 +111,7 @@ func (g *Generator) Generate(ctx context.Context, since time.Time) (*models.Dige
 		Signals:      dereferSignals(signals),
 		Trends:       dereferTrends(trends),
 		Markdown:     md,
+		HTML:         htmlReport,
 	}
 
 	if err := g.repo.SaveDigest(ctx, digest); err != nil {

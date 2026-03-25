@@ -123,6 +123,7 @@ type Digest struct {
 	Signals     []Signal        `json:"signals"`
 	Trends      []Trend         `json:"trends"`
 	Markdown    string          `json:"markdown"` // fully rendered report
+	HTML        string          `json:"html"`     // fully rendered HTML report
 }
 
 // CollectStats summarises a collect run.
