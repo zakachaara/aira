@@ -4,6 +4,8 @@ on:
   push:
     branches: 
       - test-release-workflow #[main, develop]#pull_request:#  branches: [main]
+    tags:
+      - 'v*'
 
 jobs:
   test:
