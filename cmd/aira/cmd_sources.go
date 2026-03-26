@@ -172,7 +172,7 @@ func sourcesInitDefaultsCmd() *cobra.Command {
 				added++
 			}
 			fmt.Printf("\n  ✓ Added %d default sources.\n", added)
-			fmt.Println("  Run: aira sources list\n")
+			fmt.Println("  Run: aira sources list")
 			return nil
 		},
 	}

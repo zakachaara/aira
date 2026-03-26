@@ -36,7 +36,7 @@ The process runs until it receives SIGINT or SIGTERM.`,
 			s := scheduler.New(app.repo, app.cfg)
 
 			if runNow {
-				fmt.Println("\n  ▶ Running full pipeline immediately (--run-now)…\n")
+				fmt.Println("\n  ▶ Running full pipeline immediately (--run-now)…")
 				if err := s.RunNow(ctx); err != nil {
 					return err
 				}
@@ -49,7 +49,7 @@ The process runs until it receives SIGINT or SIGTERM.`,
 			fmt.Printf("\n  ✓ AIRA scheduler running\n")
 			fmt.Printf("    Collect:  %s\n", app.cfg.Schedule.Collect)
 			fmt.Printf("    Digest:   %s\n", app.cfg.Schedule.Digest)
-			fmt.Println("  Send SIGINT (Ctrl+C) to stop.\n")
+			fmt.Println("  Send SIGINT (Ctrl+C) to stop.")
 
 			quit := make(chan os.Signal, 1)
 			signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
