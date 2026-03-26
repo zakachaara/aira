@@ -361,7 +361,7 @@ body {
   position: absolute;
   top: 0; left: 0;
   width: 3px;
-  height: 100%;
+  height: 100%%;
 }
 .signal-score-bar {
   position: absolute;
@@ -401,7 +401,7 @@ body {
   overflow: hidden;
 }
 .score-fill {
-  height: 100%;
+  height: 100%%;
   border-radius: 2px;
 }
 
@@ -462,7 +462,7 @@ body {
   overflow: hidden;
 }
 .vel-fill {
-  height: 100%;
+  height: 100%%;
   background: var(--teal);
   border-radius: 2px;
 }
