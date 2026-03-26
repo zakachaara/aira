@@ -163,7 +163,7 @@ func TestGUIDExists(t *testing.T) {
 		t.Error("expected guid to not exist yet")
 	}
 
-	_ = repo.SaveRawEntry(ctx(), &models.RawEntry{
+	_ , _ = repo.SaveRawEntry(ctx(), &models.RawEntry{
 		SourceID: src.ID, GUID: "not-yet", Title: "T", Published: time.Now(),
 	})
 
