@@ -73,7 +73,7 @@ jobs:
           cache: true
 
       - name: Build binary
-        shell: ${{ matrix.shell }}
+        shell: bash
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
           COMMIT=$(git rev-parse --short HEAD)
