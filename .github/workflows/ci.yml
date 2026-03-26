@@ -81,9 +81,9 @@ jobs:
 
           mkdir -p dist
           CGO_ENABLED=1 GOOS=linux   GOARCH=amd64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-linux-amd64   ./cmd/aira
-          CGO_ENABLED=0 GOOS=darwin  GOARCH=amd64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-darwin-amd64  ./cmd/aira
-          CGO_ENABLED=0 GOOS=darwin  GOARCH=arm64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-darwin-arm64  ./cmd/aira
-          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-windows-amd64.exe ./cmd/aira
+          CGO_ENABLED=1 GOOS=darwin  GOARCH=amd64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-darwin-amd64  ./cmd/aira
+          CGO_ENABLED=1 GOOS=darwin  GOARCH=arm64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-darwin-arm64  ./cmd/aira
+          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$LDFLAGS" -o dist/aira-windows-amd64.exe ./cmd/aira
           ls -lh dist/
 
       - name: Create GitHub Release
